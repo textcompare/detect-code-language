@@ -376,6 +376,598 @@ const LANGUAGES = {
         // putStrLn
         { pattern: /putStrLn\(.+\)/, points: 1 },
     ],
+    Kotlin: [
+      // Kotlin variable declaration
+      { pattern: /(val|var)( )+\w+( )*=/, points: 2 },
+      // Kotlin function definition
+      { pattern: /fun( )+\w+\(.*\)( )*:/, points: 2 },
+      // Kotlin class declaration
+      { pattern: /class( )+\w+/, points: 2 },
+      // Kotlin if statement
+      { pattern: /if( )+\(.+\)/, points: 2 },
+      // Kotlin for loop
+      { pattern: /for( )+\(.+\)/, points: 2 },
+      // Kotlin lambda expression
+      { pattern: /\{.*\s*->\s*.+\}/, points: 2 },
+  ],
+  Rust: [
+    // Rust variable declaration
+    { pattern: /(let|const)( )+\w+( )*=/, points: 2 },
+    // Rust function definition
+    { pattern: /fn( )+\w+\(.*\)( )*{/, points: 2 },
+    // Rust struct declaration
+    { pattern: /struct( )+\w+/, points: 2 },
+    // Rust if statement
+    { pattern: /if( )+\(.+\)/, points: 2 },
+    // Rust match expression
+    { pattern: /match( )+\w+/, points: 2 },
+],
+Dart: [
+  // Dart variable declaration
+  { pattern: /var( )+\w+( )*=/, points: 2 },
+  // Dart function definition
+  { pattern: /(\w+ )?\w+\(.*\)( )*{/, points: 2 },
+  // Dart class declaration
+  { pattern: /class( )+\w+/, points: 2 },
+  // Dart if statement
+  { pattern: /if( )+\(.+\)/, points: 2 },
+  // Dart for loop
+  { pattern: /for( )+\(.+\)/, points: 2 },
+  // Dart lambda expression
+  { pattern: /(\w+ )?=>( )*\{.+\}/, points: 2 },
+],
+Julia: [
+  // Julia variable declaration
+  { pattern: /\w+( )?=( )?.+/, points: 2 },
+  // Julia function definition
+  { pattern: /function( )+\w+(\(.+\))?/, points: 2 },
+  // Julia struct declaration
+  { pattern: /struct( )+\w+/, points: 2 },
+  // Julia if statement
+  { pattern: /if( )+.+/, points: 2 },
+  // Julia for loop
+  { pattern: /for( )+.+/, points: 2 },
+  // Julia lambda expression
+  { pattern: /(\w+ )?->( )*\{.+\}/, points: 2 },
+],
+Scala: [
+  // Scala variable declaration
+  { pattern: /val( )+\w+( )?=( )?.+/, points: 2 },
+  // Scala function definition
+  { pattern: /def( )+\w+(\(.+\))?/, points: 2 },
+  // Scala class declaration
+  { pattern: /class( )+\w+/, points: 2 },
+  // Scala if statement
+  { pattern: /if( )+.+/, points: 2 },
+  // Scala for loop
+  { pattern: /for( )+.+/, points: 2 },
+  // Scala lambda expression
+  { pattern: /(\w+ )?=>( )*\{.+\}/, points: 2 },
+],
+Groovy: [
+  // Groovy variable declaration
+  { pattern: /def( )+\w+( )?=( )?.+/, points: 2 },
+  // Groovy function definition
+  { pattern: /\w+( )?(\(.+\))?( )*{/, points: 2 },
+  // Groovy class declaration
+  { pattern: /class( )+\w+/, points: 2 },
+  // Groovy if statement
+  { pattern: /if( )+.+/, points: 2 },
+  // Groovy for loop
+  { pattern: /for( )+.+/, points: 2 },
+  // Groovy closure
+  { pattern: /(\w+ )?->( )*\{.+\}/, points: 2 },
+],
+Bash: [
+  // Bash variable declaration
+  { pattern: /\w+=( )*.+/, points: 2 },
+  // Bash function definition
+  { pattern: /\w+\(\)( )*[{(]/, points: 2 },
+  // Bash if statement
+  { pattern: /if( )+.+/, points: 2 },
+  // Bash for loop
+  { pattern: /for( )+.+/, points: 2 },
+  // Bash while loop
+  { pattern: /while( )+.+/, points: 2 },
+  // Bash case statement
+  { pattern: /case( )+.+in/, points: 2 },
+],
+Lua: [
+  // Lua variable declaration
+  { pattern: /\w+=( )*.+/, points: 2 },
+  // Lua function definition
+  { pattern: /function( )+\w+(\(.+\))?/, points: 2 },
+  // Lua if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // Lua for loop
+  { pattern: /for( )+.+do/, points: 2 },
+  // Lua while loop
+  { pattern: /while( )+.+do/, points: 2 },
+  // Lua table declaration
+  { pattern: /\w+=( )*\{.+\}/, points: 2 },
+],
+FSharp: [
+  // F# variable declaration
+  { pattern: /let( )+\w+( )?=( )?.+/, points: 2 },
+  // F# function definition
+  { pattern: /let( )+\w+(\(.+\))?/, points: 2 },
+  // F# type declaration
+  { pattern: /type( )+\w+/, points: 2 },
+  // F# if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // F# for loop
+  { pattern: /for( )+.+do/, points: 2 },
+  // F# match expression
+  { pattern: /match( )+.+with/, points: 2 },
+],
+MATLAB: [
+  // MATLAB variable declaration
+  { pattern: /\w+=( )*.+/, points: 2 },
+  // MATLAB function definition
+  { pattern: /\w+( )?=\w+\(.+\)/, points: 2 },
+  // MATLAB if statement
+  { pattern: /if( )+.+/, points: 2 },
+  // MATLAB for loop
+  { pattern: /for( )+.+/, points: 2 },
+  // MATLAB while loop
+  { pattern: /while( )+.+/, points: 2 },
+  // MATLAB matrix declaration
+  { pattern: /\w+=( )*\[.+\]/, points: 2 },
+],
+Lisp: [
+  // Lisp variable declaration
+  { pattern: /\w+=( )*.+/, points: 2 },
+  // Lisp function definition
+  { pattern: /\(defun( )+\w+( )?\(.+\)\)/, points: 2 },
+  // Lisp if statement
+  { pattern: /\(if( )+.+\)/, points: 2 },
+  // Lisp for loop
+  { pattern: /\(loop( )+.+\)/, points: 2 },
+  // Lisp while loop
+  { pattern: /\(while( )+.+\)/, points: 2 },
+  // Lisp list declaration
+  { pattern: /\w+=( )*\(.+\)/, points: 2 },
+],
+Prolog: [
+  // Prolog fact declaration
+  { pattern: /\w+\(.+\)\./, points: 2 },
+  // Prolog rule declaration
+  { pattern: /\w+\(( )?.+( )?(\,( )?.+)?\)( )?:-/, points: 2 },
+  // Prolog cut operator
+  { pattern: /!/, points: 2 },
+],
+COBOL: [
+  // COBOL variable declaration
+  { pattern: /\w+( )+PIC( )+.+/, points: 2 },
+  // COBOL paragraph declaration
+  { pattern: /\w+( )+\.\n/, points: 2 },
+  // COBOL IF statement
+  { pattern: /IF( )+.+/, points: 2 },
+  // COBOL PERFORM statement
+  { pattern: /PERFORM( )+.+/, points: 2 },
+  // COBOL MOVE statement
+  { pattern: /MOVE( )+.+TO( )+.+/, points: 2 },
+],
+Fortran: [
+  // Fortran variable declaration
+  { pattern: /\w+( )?=( )?.+/, points: 2 },
+  // Fortran subroutine declaration
+  { pattern: /SUBROUTINE( )+\w+\(.+\)/, points: 2 },
+  // Fortran IF statement
+  { pattern: /IF( )+.+THEN/, points: 2 },
+  // Fortran DO loop
+  { pattern: /DO( )+.+/, points: 2 },
+  // Fortran CONTINUE statement
+  { pattern: /CONTINUE/, points: 2 },
+],
+Ada: [
+  // Ada variable declaration
+  { pattern: /\w+( )?:( )?.+/, points: 2 },
+  // Ada procedure declaration
+  { pattern: /PROCEDURE( )+\w+/, points: 2 },
+  // Ada IF statement
+  { pattern: /IF( )+.+THEN/, points: 2 },
+  // Ada LOOP statement
+  { pattern: /LOOP( )+.+/, points: 2 },
+  // Ada assignment statement
+  { pattern: /\w+( )?:=.*/, points: 2 },
+],
+Elm: [
+  // Elm variable declaration
+  { pattern: /\w+( )?=.+/, points: 2 },
+  // Elm function definition
+  { pattern: /\w+( )?\(.+\)( )?=.+/, points: 2 },
+  // Elm type declaration
+  { pattern: /type( )+\w+( )?=.+/, points: 2 },
+  // Elm if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // Elm case expression
+  { pattern: /case( )+.+of/, points: 2 },
+],
+Crystal: [
+  // Crystal variable declaration
+  { pattern: /\w+( )?=.+/, points: 2 },
+  // Crystal function definition
+  { pattern: /\w+( )?\(.+\)( )?=.+/, points: 2 },
+  // Crystal class declaration
+  { pattern: /class( )+\w+/, points: 2 },
+  // Crystal if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // Crystal while loop
+  { pattern: /while( )+.+do/, points: 2 },
+  // Crystal module declaration
+  { pattern: /module( )+\w+/, points: 2 },
+],
+Elixir: [
+  // Elixir variable declaration
+  { pattern: /\w+( )?=.+/, points: 2 },
+  // Elixir function definition
+  { pattern: /\w+\(.*\)( )?->/, points: 2 },
+  // Elixir module declaration
+  { pattern: /defmodule( )+\w+/, points: 2 },
+          // Elixir if statement
+          { pattern: /if( )+.+do/, points: 2 },
+          // Elixir case expression
+          { pattern: /case( )+.+do/, points: 2 },
+          // Elixir pipe operator
+          { pattern: /\|>/, points: 2 },
+          // Elixir module attribute
+          { pattern: /@(\w+)/, points: 2 },
+      ],
+      Clojure: [
+        // Clojure variable declaration
+        { pattern: /\(def( )+\w+( )?.+\)/, points: 2 },
+        // Clojure function definition
+        { pattern: /\((defn|defn-)( )+\w+( )?\[.*\]( )?.+\)/, points: 2 },
+        // Clojure if statement
+        { pattern: /\(if( )+.+\)/, points: 2 },
+        // Clojure for loop
+        { pattern: /\(for( )+.+\)/, points: 2 },
+        // Clojure while loop
+        { pattern: /\(while( )+.+\)/, points: 2 },
+        // Clojure map declaration
+        { pattern: /\{.*\}/, points: 2 },
+    ],
+    CoffeeScript: [
+      // CoffeeScript variable declaration
+      { pattern: /\w+( )?=( )?.+/, points: 2 },
+      // CoffeeScript function definition
+      { pattern: /\w+( )?[-=]>/, points: 2 },
+      // CoffeeScript class declaration
+      { pattern: /\w+( )?class/, points: 2 },
+      // CoffeeScript if statement
+      { pattern: /if( )+.+/, points: 2 },
+      // CoffeeScript for loop
+      { pattern: /for( )+.+/, points: 2 },
+      // CoffeeScript array declaration
+      { pattern: /\[.*\]/, points: 2 },
+  ],
+  ObjectiveCPP: [
+    // Objective-C++ variable declaration
+    { pattern: /\w+( )?=( )?.+/, points: 2},
+   // Objective-C++ for loop
+   { pattern: /for\(.+\)/, points: 2 },
+   // Objective-C++ while loop
+   { pattern: /while\(.+\)/, points: 2 },
+   // Objective-C++ if statement
+   { pattern: /if\(.+\)/, points: 2 },
+   // Objective-C++ switch statement
+   { pattern: /switch\(.+\)/, points: 2 },
+   // Objective-C++ property declaration
+   { pattern: /\@property( )?.+;/, points: 2 },
+   ],
+
+   Racket: [
+    // Racket variable declaration
+    { pattern: /\(define( )+\(.*\)( )?.+\)/, points: 2 },
+    // Racket function definition
+    { pattern: /\(define( )+\(.*\)/, points: 2 },
+    // Racket structure declaration
+    { pattern: /\(struct( )+\w+( )?.+\)/, points: 2 },
+    // Racket if statement
+    { pattern: /\(if( )+.+\)/, points: 2 },
+    // Racket for loop
+    { pattern: /\(for( )+.+\)/, points: 2 },
+    // Racket lambda expression
+    { pattern: /\(lambda( )?\(.*\)/, points: 2 },
+],
+Erlang: [
+  // Erlang variable declaration
+  { pattern: /\w+( )?=( )?.+/, points: 2 },
+  // Erlang function definition
+  { pattern: /\w+\(.*\)( )?->/, points: 2 },
+  // Erlang module declaration
+  { pattern: /-module\(.*\)/, points: 2 },
+  // Erlang if statement
+  { pattern: /if( )+.+->/, points: 2 },
+  // Erlang case expression
+  { pattern: /case( )+.+of/, points: 2 },
+  // Erlang record declaration
+  { pattern: /-record\(.*\)/, points: 2 },
+],
+Apex: [
+  // Apex variable declaration
+  { pattern: /\w+( )?=( )?.+/, points: 2 },
+  // Apex method definition
+  { pattern: /(\w+\s)+\w+\(.+\)( )?\{/, points: 2 },
+  // Apex class declaration
+  { pattern: /(public|private|global)( )?class( )+\w+/, points: 2 },
+  // Apex if statement
+  { pattern: /if( )+.+/, points: 2 },
+  // Apex for loop
+  { pattern: /for( )+.+/, points: 2 },
+  // Apex SOQL query
+  { pattern: /SELECT( )+.+FROM( )+.+/, points: 2 },
+],
+VHDL: [
+  // VHDL signal declaration
+  { pattern: /\w+( )?:( )?(\w+|.+)( )?:=/, points: 2 },
+  // VHDL process declaration
+  { pattern: /process( )?\(.+\)/, points: 2 },
+  // VHDL if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // VHDL case statement
+  { pattern: /case( )+.+is/, points: 2 },
+  // VHDL for loop
+  { pattern: /for( )+.+in/, points: 2 },
+  // VHDL entity declaration
+  { pattern: /entity( )+\w+/, points: 2 },
+],
+Verilog: [
+  // Verilog wire or reg declaration
+  { pattern: /(wire|reg)( )+(.+)?;/, points: 2 },
+  // Verilog module declaration
+  { pattern: /module( )+\w+\(/, points: 2 },
+  // Verilog if statement
+  { pattern: /if\(.+\)/, points: 2 },
+  // Verilog case statement
+  { pattern: /case\(.+\)/, points: 2 },
+  // Verilog for loop
+  { pattern: /for\(.+\)/, points: 2 },
+  // Verilog always block
+  { pattern: /always\(/, points: 2 },
+],
+Scheme: [
+  // Scheme variable declaration
+  { pattern: /\(define( )+\(.*\)/, points: 2 },
+  // Scheme function definition
+  { pattern: /\(define( )+\(.*\)/, points: 2 },
+  // Scheme if statement
+  { pattern: /\(if( )+.+\)/, points: 2 },
+  // Scheme for loop
+  { pattern: /\(for( )+.+\)/, points: 2 },
+  // Scheme while loop
+  { pattern: /\(while( )+.+\)/, points: 2 },
+  // Scheme lambda expression
+  { pattern: /\(lambda( )?\(.*\)/, points: 2 },
+],
+Tcl: [
+  // Tcl variable declaration
+  { pattern: /set( )+\w+( )?.+/, points: 2 },
+  // Tcl procedure definition
+  { pattern: /proc( )+\w+( )?\{.+/, points: 2 },
+  // Tcl if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // Tcl switch statement
+  { pattern: /switch( )+\{.+/, points: 2 },
+  // Tcl for loop
+  { pattern: /for( )+\{\w+ (in|range) .+\}/, points: 2 },
+  // Tcl while loop
+  { pattern: /while( )+.+/, points: 2 },
+],
+COOL: [
+  // COOL class declaration
+  { pattern: /class( )+\w+/, points: 2 },
+  // COOL method definition
+  { pattern: /\w+( )?:( )?(\w+)?/, points: 2 },
+  // COOL if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // COOL case statement
+  { pattern: /case( )+.+of/, points: 2 },
+  // COOL let expression
+  { pattern: /let( )+.+in/, points: 2 },
+  // COOL while loop
+  { pattern: /while( )+.+loop/, points: 2 },
+],
+Nim: [
+  // Nim variable declaration
+  { pattern: /\w+( )?=( )?.+/, points: 2 },
+  // Nim procedure definition
+  { pattern: /proc( )+\w+( )?\{/, points: 2 },
+  // Nim type declaration
+  { pattern: /type( )+\w+( )?=/, points: 2 },
+  // Nim if statement
+  { pattern: /if( )+.+:/, points: 2 },
+  // Nim case statement
+  { pattern: /case( )+.+of/, points: 2 },
+  // Nim while loop
+  { pattern: /while( )+.+:/, points: 2 },
+],
+J: [
+  // J variable declaration
+  { pattern: /(\w+)(=:)?(.+)?/, points: 2 },
+  // J function definition
+  { pattern: /(\w+)(=:)?(.*)( )=(:)?/, points: 2 },
+  // J if statement
+  { pattern: /if( )+.+do/, points: 2 },
+  // J case statement
+  { pattern: /switch( )+\(.+\)/, points: 2 },
+  // J for loop
+  { pattern: /for( )+\(.+\)/, points: 2 },
+  // J while loop
+  { pattern: /while( )+.+do/, points: 2 },
+],
+K: [
+  // K variable declaration
+  { pattern: /\w+( )?:=( )?.+/, points: 2 },
+  // K function definition
+  { pattern: /\w+( )?\{.*\}/, points: 2 },
+  // K if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // K case statement
+  { pattern: /case( )+.+of/, points: 2 },
+  // K for loop
+  { pattern: /for( )+.+in/, points: 2 },
+  // K while loop
+  { pattern: /while( )+.+do/, points: 2 },
+],
+Racket: [
+  // Racket variable declaration
+  { pattern: /\(define( )+\(.*\)( )?.+\)/, points: 2 },
+  // Racket function definition
+  { pattern: /\(define( )+\(.*\)/, points: 2 },
+  // Racket structure declaration
+  { pattern: /\(struct( )+\w+( )?.+\)/, points: 2 },
+  // Racket if statement
+  { pattern: /\(if( )+.+\)/, points: 2 },
+  // Racket for loop
+  { pattern: /\(for( )+.+\)/, points: 2 },
+  // Racket lambda expression
+  { pattern: /\(lambda( )?\(.*\)/, points: 2 },
+],
+Alice: [
+  // Alice variable declaration
+  { pattern: /\w+( )?:=( )?.+/, points: 2 },
+  // Alice method definition
+  { pattern: /\w+( )?\{.*\}/, points: 2 },
+  // Alice if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // Alice case statement
+  { pattern: /case( )+.+of/, points: 2 },
+  // Alice for loop
+  { pattern: /for( )+.+in/, points: 2 },
+  // Alice while loop
+  { pattern: /while( )+.+do/, points: 2 },
+],
+APL: [
+  // APL variable declaration
+  { pattern: /[A-Z]\w*( )?←( )?.+/, points: 2 },
+  // APL function definition
+  { pattern: /[A-Z]\w*( )?←( )?\{.*\}/, points: 2 },
+  // APL if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // APL case statement
+  { pattern: /case( )+.+of/, points: 2 },
+  // APL for loop
+  { pattern: /for( )+.+in/, points: 2 },
+  // APL while loop
+  { pattern: /while( )+.+do/, points: 2 },
+],
+Bash: [
+  // Bash variable declaration
+  { pattern: /\w+( )?=.+/, points: 2 },
+  // Bash function definition
+  { pattern: /\w+\(.*\)( )?\{/, points: 2 },
+  // Bash if statement
+  { pattern: /if( )+.+then/, points: 2 },
+  // Bash case statement
+  { pattern: /case( )+.+in/, points: 2 },
+  // Bash for loop
+  { pattern: /for( )+.+in/, points: 2 },
+  // Bash while loop
+  { pattern: /while( )+.+do/, points: 2 },
+],
+Kotlin: [
+  // Kotlin variable declaration
+  { pattern: /\bval\b\s+\w+\s*=\s*.+/, points: 2 },
+  { pattern: /\bvar\b\s+\w+\s*=\s*.+/, points: 2 },
+  // Kotlin function declaration
+  { pattern: /\bfun\b\s+\w+\(.+\)\s*{/, points: 2 },
+  // Kotlin class declaration
+  { pattern: /\bclass\b\s+\w+(\s*:\s*\w+)?\s*{/, points: 2 },
+  // Kotlin if statement
+  { pattern: /\bif\b\s*\(.+\)\s*{/, points: 2 },
+  // Kotlin when expression
+  { pattern: /\bwhen\b\s*{/, points: 2 },
+  // Kotlin for loop
+  { pattern: /\bfor\b\s*\(\w+\s+in\s+.+\)\s*{/, points: 2 },
+  // Kotlin while loop
+  { pattern: /\bwhile\b\s*\(.+\)\s*{/, points: 2 },
+  // Kotlin lambda expression
+  { pattern: /\{.*->.*\}/, points: 2 },
+],
+XML: [
+  // XML tags
+  { pattern: /<[^\/]+>.*<\/[^>]+>/, points: 2 },
+  // XML self-closing tags
+  { pattern: /<[^\/]+\/>/, points: 2 },
+  // XML comments
+  { pattern: /<!--.*-->/, points: 2 },
+],
+
+YAML: [
+  // YAML key-value pairs
+  { pattern: /^\s*\w+\s*:\s*.+$/, points: 2 },
+],
+
+JSON: [
+  // JSON object
+  { pattern: /\{.*\}/, points: 2 },
+  // JSON array
+  { pattern: /\[.*\]/, points: 2 },
+],
+
+Markdown: [
+  // Markdown headings
+  { pattern: /^(#+)\s+.+$/, points: 2 },
+  // Markdown lists
+  { pattern: /^(\s*[-*+]\s+|(\d+\.)\s+).+$/, points: 2 },
+  // Markdown code block
+  { pattern: /^```[\s\S]*?^```$/, points: 2 },
+],
+
+SGML: [
+  // SGML tags
+  { pattern: /<[^\/]+>.*<\/[^>]+>/, points: 2 },
+  // SGML self-closing tags
+  { pattern: /<[^\/]+\/>/, points: 2 },
+  // SGML comments
+  { pattern: /<!--.*-->/, points: 2 },
+],
+
+HTML5: [
+  // HTML tags
+  { pattern: /<[^\/]+>.*<\/[^>]+>/, points: 2 },
+  // HTML self-closing tags
+  { pattern: /<[^\/]+\/>/, points: 2 },
+  // HTML comments
+  { pattern: /<!--.*-->/, points: 2 },
+],
+
+TEI: [
+  // TEI tags
+  { pattern: /<[^\/]+>.*<\/[^>]+>/, points: 2 },
+  // TEI self-closing tags
+  { pattern: /<[^\/]+\/>/, points: 2 },
+  // TEI comments
+  { pattern: /<!--.*-->/, points: 2 },
+],
+
+LaTeX: [
+  // LaTeX commands
+  { pattern: /\\[a-zA-Z]+(\[[^\]]+\])?{[^}]+}/, points: 2 },
+  // LaTeX environments
+  { pattern: /\\begin{[^}]+}.*\\end{[^}]+}/, points: 2 },
+],
+
+AsciiDoc: [
+  // AsciiDoc headings
+  { pattern: /^={1,5}\s+.+$/, points: 2 },
+  // AsciiDoc lists
+  { pattern: /^(\s*[-*+]\s+|\.\s+).+$/, points: 2 },
+  // AsciiDoc code block
+  { pattern: /^----\n[\s\S]*?\n----$/, points: 2 },
+],
+
+RST: [
+  // reStructuredText headings
+  { pattern: /^[\w\s]+\n[=-]+\n/, points: 2 },
+  // reStructuredText lists
+  { pattern: /^(\s*[-*+]\s+|\d+\.\s+).+$/, points: 2 },
+  // reStructuredText code block
+  { pattern: /^::\n\n\s+[\s\S]*$/, points: 2 },
+],
+
     Unknown: []
   } 
   function getPoints(language, lineOfCode, checkers) {
