@@ -1,6 +1,6 @@
 {
   "name": "detect-code-language",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,14 @@
   },
   "author": "",
   "license": "ISC",
+  "keywords": [
+    "code language detector",
+    "detect code",
+    "indentify programming language",
+    "get programming language",
+    "detect programming language"
+  ],
   "dependencies": {
-    "detect-code-language": "file:detect-code-language-1.0.1.tgz"
+    "detect-code-language": "file:detect-code-language-1.0.2.tgz"
   }
 }

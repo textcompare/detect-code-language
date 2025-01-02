@@ -1,0 +1,242 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Editor files
+.vscode/
+*.suo
+*.user
+*.sln
+*.tmp
+*.bak
+*.suo
+*.user
+*.sln
+*.tmp
+*.bak
+*.vbp
+*.ncb
+*.aps
+*.pch
+*.opt
+*.plg
+*.bsc
+*.scc
+*.vspscc
+*.userprefs
+*.filters
+*.dll
+*.pdb
+*.exe
+*~
+*.obj
+*.ilk
+*.exp
+*.lib
+*.idb
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.idb
+*.pch
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.user
+*.vspscc
+*.vssscc
+*.ncb
+*.suo
+*.pdb
+*.idb
+*.log
+*.ipch
+*.obj
+*.dsp
+*.clw
+*.dsw
+
+# Testing
+/coverage/
+/test/reports/
+
+# Temporary files
+.DS_Store
+Thumbs.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.iws
+
+# Visual Studio Code
+.vscode/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+.swp
+.swo
+.swm
+
+# Grunt
+node_modules/grunt/
+
+# Bower
+bower_components/
+
+# PhantomJS
+.phantomjs/
+
+# Editor preferences
+*.sublime-project
+*.sublime-workspace
+*.sublime_session
+
+# Mac OS X
+.DS_Store
+
+# Windows
+*.suo
+*.user
+*.sln
+*.tmp
+*.bak
+*.vbp
+*.ncb
+*.aps
+*.pch
+*.opt
+*.plg
+*.bsc
+*.scc
+*.vspscc
+*.userprefs
+*.filters
+*.dll
+*.pdb
+*.exe
+*~
+*.obj
+*.ilk
+*.exp
+*.lib
+*.idb
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.idb
+*.pch
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.user
+*.vspscc
+*.vssscc
+*.ncb
+*.suo
+*.pdb
+*.idb
+*.log
+*.ipch
+*.obj
+*.dsp
+*.clw
+*.dsw
+
+# Local environments
+.env
+.env.*
+
+# Docker
+Dockerfile*
+docker-compose.*.yml
+
+# Editor preferences
+*.sublime-project
+*.sublime-workspace
+
+# IDE
+*.iml
+.idea/
+*.iws
+
+# Logs
+*.log
+npm-debug.log
+
+# Auto-generated files
+dist/
+build/
+
+# Miscellaneous
+*.md
+*.markdown
+*.txt
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.psd
+*.ai
+*.eps
+*.raw
+*.cr2
+*.nef
+*.orf
+*.sr2
+*.arw
+*.tif
+*.tiff
+*.bmp
+*.ico
+*.icns
+*.mov
+*.mp4
+*.avi
+*.mpg
+*.mpeg
+*.flv
+*.wmv
+*.webm
+*.mkv
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aac
+*.aif
+*.aiff
+*.m4a
+*.m4b
+*.zip
+*.rar
+*.7z
+*.gz
+*.tar
+*.bz2
+*.tar.gz
+*.tgz
+
+# Secrets
+secrets.json
+.env.local

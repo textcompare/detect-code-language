@@ -489,20 +489,92 @@ CSS: [
     },
   ],
 
-  "C#": [
-    // Variable declaration
-    { pattern: /(int|float|string|bool)( )+\w+( )*=/, points: 2 },
-    // Method definition
-    { pattern: /(void|int|string|bool)( )+\w+\(.*\)/, points: 2 },
+  CSharp: [
+    // Namespace declaration
+    { pattern: /^\s*namespace\s+\w+(\.\w+)*\s*{/, points: 2 },
+    // Using directives (imports)
+    { pattern: /^\s*using\s+[\w\.\,]+\s*;/, points: 2 },
+    // Detecting `using System;`
+    { pattern: /^\s*using\s+System\s*;/, points: 3 },
     // Class declaration
-    { pattern: /class( )+\w+/, points: 2 },
-    // Namespace
-    { pattern: /namespace( )+\w+/, points: 2 },
-    // LINQ
-    { pattern: /(from|select|where)( )+.+/, points: 2 },
-    // Console.WriteLine
-    { pattern: /Console\.Write(Line)?\(.+\)/, points: 1 },
-  ],
+    { pattern: /^\s*(public|private|protected|internal|static|sealed|abstract)?\s*class\s+\w+(\s+extends\s+\w+)?(\s+implements\s+\w+(,\s*\w+)*)?\s*{/, points: 3 },
+    // Interface declaration
+    { pattern: /^\s*(public|private|protected|internal|static|sealed|abstract)?\s*interface\s+\w+(\s+extends\s+\w+)?\s*{/, points: 3 },
+    // Method declaration
+    { pattern: /^\s*(public|private|protected|internal|static|virtual|abstract|sealed|async)?\s*(void|\w+(\[\])?(\s*\[\w+\])?)\s+\w+\s*\(.*\)\s*{/, points: 3 },
+    // Properties
+    { pattern: /^\s*(public|private|protected|internal|static|virtual|abstract|sealed)?\s*(\w+\[\])?\s+\w+\s*{.*}/, points: 2 },
+    // Field declaration
+    { pattern: /^\s*(public|private|protected|internal|static|readonly|volatile)?\s*(\w+\[\])?\s+\w+\s*=?\s*.+\s*;/, points: 2 },
+    // Event declaration
+    { pattern: /^\s*(public|private|protected|internal)?\s*event\s+\w+\s+\w+\s*;/, points: 2 },
+    // Constructor
+    { pattern: /^\s*(public|private|protected|internal|static)?\s*\w+\s*\(.*\)\s*{/, points: 3 },
+    // Indexers
+    { pattern: /^\s*(public|private|protected|internal|static)?\s*\[\s*(\w+\[\])?\s*\w+\s*\]\s*{/, points: 3 },
+    // Lambda expressions (C# 3.0+)
+    { pattern: /\(\w+\)\s*=>\s*.+/, points: 3 },
+    // Async methods (C# 5.0+)
+    { pattern: /async\s+(void|\w+(\[\])?(\s*\[\w+\])?)\s+\w+\s*\(.*\)\s*{/, points: 3 },
+    { pattern: /await\s+\w+/, points: 3 },
+    // LINQ queries (C# 3.0+)
+    { pattern: /\.\s*(Where|Select|OrderBy|GroupBy|Join|SelectMany|Aggregate|FirstOrDefault|ToList|ToArray|ToDictionary)\(/, points: 3 },
+    // Exception handling (try-catch-finally)
+    { pattern: /try\s*{/, points: 2 },
+    { pattern: /catch\s*\(.*\)\s*{/, points: 2 },
+    { pattern: /finally\s*{/, points: 2 },
+    // Conditional statement (if, else if, else)
+    { pattern: /if\s*\(.*\)\s*{/, points: 2 },
+    { pattern: /else\s*{/, points: 2 },
+    { pattern: /else\s+if\s*\(.*\)\s*{/, points: 2 },
+    // Switch statement
+    { pattern: /switch\s*\(.*\)\s*{/, points: 2 },
+    { pattern: /case\s+.*:/, points: 2 },
+    { pattern: /default\s*:/, points: 2 },
+    // For loops
+    { pattern: /for\s*\(.*\)\s*{/, points: 2 },
+    // While loop
+    { pattern: /while\s*\(.*\)\s*{/, points: 2 },
+    // Do-while loop
+    { pattern: /do\s*{/, points: 2 },
+    // Foreach loop (C# 3.0+)
+    { pattern: /foreach\s*\(.*\)\s*{/, points: 3 },
+    // Array initialization
+    { pattern: /new\s+\w+\[\]\s*=\s*\{.*\}\s*;/, points: 2 },
+    // Nullable types (C# 2.0+)
+    { pattern: /\w+\?/, points: 2 },
+    // Nullable type checking (C# 2.0+)
+    { pattern: /HasValue\s*==\s*true/, points: 2 },
+    // Properties with getters and setters
+    { pattern: /get\s*{\s*return\s+\w+;\s*}\s+set\s*{\s*\w+\s*=\s*\w+;\s*}/, points: 3 },
+    // Delegates and events
+    { pattern: /delegate\s+\w+\s+\w+\s*;/, points: 2 },
+    { pattern: /event\s+\w+\s+\w+\s*;/, points: 2 },
+    // Extension methods (C# 3.0+)
+    { pattern: /public\s+static\s+.*\s+this\s+\w+\s+\w+\s*\(.*\)\s*{/, points: 3 },
+    // Static classes
+    { pattern: /public\s+static\s+class\s+\w+\s*{/, points: 2 },
+    // Static constructors
+    { pattern: /static\s+.*\s*\(\)\s*{/, points: 2 },
+    // Operator overloading
+    { pattern: /\s*(public|private|protected)?\s*static\s*(\w+\[\])?\s*\w+\s*operator\s*([+\-*/%&|^<>]=?)\s*\(.*\)/, points: 3 },
+    // Using statement (C# 3.0+)
+    { pattern: /using\s+\(.*\)\s*{/, points: 3 },
+    // Console.WriteLine usage
+    { pattern: /Console\.WriteLine\s*\(.*\);/, points: 10 },
+    // C# 9+ features: records
+    { pattern: /record\s+\w+\s*{/, points: 4 },
+    // C# 9+ features: init-only properties
+    { pattern: /init\s*{\s*}/, points: 3 },
+    // C# 9+ features: pattern matching
+    { pattern: /is\s+\w+(\s+when\s+.*)?/, points: 3 },
+    // Deprecated practices (penalize)
+    { pattern: /goto\s+\w+;/, points: -3 }, // Goto statement
+    { pattern: /unsafe\s*\{/, points: -2 }, // Unsafe code
+    { pattern: /fixed\s+\w+\[\]/, points: -3 }, // Fixed size buffers
+],
+
+
 
   R: [
     // Variable assignment
