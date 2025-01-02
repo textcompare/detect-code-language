@@ -51,7 +51,6 @@ This code provides a basic framework for detecting the programming language of a
 - Tcl
 - COOL
 - Nim
-- J
 - K
 - Racket
 - Alice
