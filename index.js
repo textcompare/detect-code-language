@@ -809,20 +809,20 @@ const LANGUAGES = {
     // Nim while loop
     { pattern: /while( )+.+:/, points: 2 },
   ],
-  J: [
-    // J variable declaration
-    { pattern: /(\w+)(=:)?(.+)?/, points: 2 },
-    // J function definition
-    { pattern: /(\w+)(=:)?(.*)( )=(:)?/, points: 2 },
-    // J if statement
-    { pattern: /if( )+.+do/, points: 2 },
-    // J case statement
-    { pattern: /switch( )+\(.+\)/, points: 2 },
-    // J for loop
-    { pattern: /for( )+\(.+\)/, points: 2 },
-    // J while loop
-    { pattern: /while( )+.+do/, points: 2 },
-  ],
+  // J: [
+  //   // J variable declaration
+  //   { pattern: /(\w+)(=:)?(.+)?/, points: 2 },
+  //   // J function definition
+  //   { pattern: /(\w+)(=:)?(.*)( )=(:)?/, points: 2 },
+  //   // J if statement
+  //   { pattern: /if( )+.+do/, points: 2 },
+  //   // J case statement
+  //   { pattern: /switch( )+\(.+\)/, points: 2 },
+  //   // J for loop
+  //   { pattern: /for( )+\(.+\)/, points: 2 },
+  //   // J while loop
+  //   { pattern: /while( )+.+do/, points: 2 },
+  // ],
   K: [
     // K variable declaration
     { pattern: /\w+( )?:=( )?.+/, points: 2 },
