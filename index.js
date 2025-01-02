@@ -1,9 +1,11 @@
 const LANGUAGES = {
+
   JavaScript: [
     // undefined keyword
     { pattern: /undefined/g, points: 2 },
     // console.log('ayy lmao')
     { pattern: /console\.log( )*\(/, points: 2 },
+    { pattern: /document\.addEventListener( )*\(/, points: 2 },
     // Variable declaration
     { pattern: /(var|const|let)( )+\w+( )*=?/, points: 2 },
     // Array/Object declaration
@@ -16,34 +18,54 @@ const LANGUAGES = {
     { pattern: /function\*?(( )+[\$\w]+( )*\(.*\)|( )*\(.*\))/g, points: 1 },
     // null keyword
     { pattern: /null/g, points: 1 },
-    // lambda expression
+    // Lambda expression
     { pattern: /\(.*\)( )*=>( )*.+/, points: 1 },
     // (else )if statement
     { pattern: /(else )?if( )+\(.+\)/, points: 1 },
     // while loop
     { pattern: /while( )+\(.+\)/, points: 1 },
-    // C style variable declaration.
-    { pattern: /(^|\s)(char|long|int|float|double)( )+\w+( )*=?/, points: -1 },
-    // pointer
-    { pattern: /(\w+)( )*\*( )*\w+/, points: -1 },
-    // HTML <script> tag
-    {
-      pattern: /<(\/)?script( type=('|")text\/javascript('|"))?>/,
-      points: -50,
-    },
-    // ES6 import / export
-    {
-      pattern: /(import|export(\s+)default)\s+({\s+[\w\s,]+\s+}|\w+)\s+from\s/,
-      points: 2,
-    },
+    // for loop
+    { pattern: /for( )*\((var|let|const)?( )*\w+( )*;.+;.+\)/, points: 2 },
+    // for...of loop
+    { pattern: /for( )*\(.*( )*of( )+.*\)/, points: 2 },
+    // for...in loop
+    { pattern: /for( )*\(.*( )*in( )+.*\)/, points: 2 },
+    // JSON.stringify
+    { pattern: /JSON\.stringify\(.*\)/, points: 2 },
+    // JSON.parse
+    { pattern: /JSON\.parse\(.*\)/, points: 2 },
+    // Class declaration
+    { pattern: /class( )+\w+( )*{/, points: 3 },
+    // Constructor method
+    { pattern: /constructor\(.*\)( )*{/, points: 2 },
+    // try...catch statement
+    { pattern: /try( )*{( )*\n.*\n( )*} catch\(.*\) {/, points: 2 },
+    // Template literals
+    { pattern: /`.*\$\{.*\}.*`/, points: 2 },
+    // Regular expressions
+    { pattern: /\/.*\/[gimsuy]*/, points: 1 },
+    // ES6 import/export
+    { pattern: /(import|export(\s+)default)\s+({\s+[\w\s,]+\s+}|\w+)\s+from\s/, points: 2 },
     // ES6 arrow function
     { pattern: /\([^\(\)]{0,}\)\s+=>(\s+{)?/, points: 3 },
-    // () => {}
-    // (a) => {}
-    // (a, b) => {}
-    // ({ a, b}) => {}
-    // ([ a, b ]) => {}
-  ],
+    // Destructuring assignment
+    { pattern: /const|let|var( )+{( )*\w+(,|\w| )*( )*} =/, points: 2 },
+    // Spread/rest operator
+    { pattern: /\.{3}\w+/, points: 2 },
+    // Dynamic property access
+    { pattern: /\[\w+\]/, points: 2 },
+    // Promises (then/catch/finally)
+    { pattern: /\.then\(.*\)|\.catch\(.*\)|\.finally\(.*\)/, points: 2 },
+    // Async/await
+    { pattern: /async( )+function|await( )+\w+/, points: 3 },
+    // HTML <script> tag
+    { pattern: /<(\/)?script( type=('|")text\/javascript('|"))?>/, points: -2 },
+    // C-style variable declaration
+    { pattern: /(^|\s)(char|long|int|float|double)( )+\w+( )*=?/, points: -1 },
+    // Pointer
+    { pattern: /(\w+)( )*\*( )*\w+/, points: -1 },
+],
+
 
   C: [
     // Primitive variable declaration.
@@ -122,96 +144,254 @@ const LANGUAGES = {
 
   Python: [
     // Function definition
-    { pattern: /def( )+\w+\(.*\)( )*:/, points: 2 },
-    // while loop
-    { pattern: /while (.+):/, points: 2 },
-    // from library import something
-    { pattern: /from [\w\.]+ import (\w+|\*)/, points: 2 },
-    // class keyword
-    { pattern: /class( )*\w+(\(( )*\w+( )*\))?( )*:/, points: 2 },
-    // if keyword
-    { pattern: /if( )+(.+)( )*:/, points: 2 },
-    // elif keyword
-    { pattern: /elif( )+(.+)( )*:/, points: 2 },
-    // else keyword
-    { pattern: /else:/, points: 2 },
-    // for loop
-    { pattern: /for (\w+|\(?\w+,( )*\w+\)?) in (.+):/, points: 2 },
-    // Python variable declaration.
-    { pattern: /\w+( )*=( )*\w+(?!;)(\n|$)/, points: 1 },
-    // import something
-    { pattern: /import ([[^\.]\w])+/, points: 1, nearTop: true },
-    // print statement/function
-    { pattern: /print((( )*\(.+\))|( )+.+)/, points: 1 },
-    // &&/|| operators
-    { pattern: /(&{2}|\|{2})/, points: -1 },
-  ],
+    { pattern: /^\s*def\s+\w+\(.*\):/, points: 3 },
+    // Class definition
+    { pattern: /^\s*class\s+\w+(\(\w+\))?:/, points: 3 },
+    // Imports (standard and from-import)
+    { pattern: /^\s*(import\s+\w+|from\s+\w+\s+import\s+\w+)/, points: 2 },
+    // Indentation (leading whitespace not a tab)
+    { pattern: /^\s+(?!\t)/, points: 1 },
+    // Comments (inline or standalone)
+    { pattern: /#.+/, points: 1 },
+    // Docstrings (triple-quoted strings)
+    { pattern: /"""[\s\S]*?"""/, points: 2 },
+    { pattern: /'''[\s\S]*?'''/, points: 2 },
+    // Variables (assignment)
+    { pattern: /^\s*\w+\s*=\s*.+/, points: 2 },
+    // Lists
+    { pattern: /\[[^\[\]]*\]/, points: 2 },
+    // Tuples
+    { pattern: /\([^\(\)]*\)/, points: 2 },
+    // Dictionaries
+    { pattern: /\{(\s*'.+'\s*:\s*.+,?)+\}/, points: 2 },
+    // Sets
+    { pattern: /\{[^:]*\}/, points: 2 },
+    // Lambda functions
+    { pattern: /lambda\s+\w+\s*:\s*.+/, points: 2 },
+    // If-elif-else statement
+    { pattern: /^\s*(if|elif|else)\s+.+:/, points: 2 },
+    // Loops (for and while)
+    { pattern: /^\s*(for|while)\s+.+:/, points: 2 },
+    // Try-Except blocks
+    { pattern: /^\s*try\s*:/, points: 2 },
+    { pattern: /^\s*except\s+.+:/, points: 2 },
+    { pattern: /^\s*finally\s*:/, points: 2 },
+    // Context managers (with statement)
+    { pattern: /^\s*with\s+.+:/, points: 2 },
+    // List comprehensions
+    { pattern: /\[.+\s+for\s+\w+\s+in\s+.+\]/, points: 3 },
+    // Dict comprehensions
+    { pattern: /\{.+:.+\s+for\s+\w+\s+in\s+.+\}/, points: 3 },
+    // Generator expressions
+    { pattern: /\(.+\s+for\s+\w+\s+in\s+.+\)/, points: 3 },
+    // F-strings (Python 3.6+)
+    { pattern: /f"[^"]*{[^}]+}[^"]*"/, points: 3 },
+    // Print statement (Python 2)
+    { pattern: /^\s*print\s+.+/, points: 1 },
+    // Print function (Python 3)
+    { pattern: /^\s*print\(.*\)/, points: 2 },
+    // Itertools or functools (common Python libraries)
+    { pattern: /from\s+(itertools|functools)\s+import\s+.+/, points: 2 },
+    // Decorators
+    { pattern: /^\s*@\w+/, points: 3 },
+    // Async/await (Python 3.5+)
+    { pattern: /async\s+def\s+\w+\(.*\):/, points: 3 },
+    { pattern: /await\s+\w+/, points: 2 },
+    // Type hints (Python 3.5+)
+    { pattern: /\w+\s*:\s*\w+/, points: 3 },
+    { pattern: /->\s*\w+/, points: 3 },
+    // Walrus operator (Python 3.8+)
+    { pattern: /:=/, points: 3 },
+    // Deprecated print statement (penalize for Python 2 syntax)
+    { pattern: /^\s*print\s+.+/, points: -2 },
+    // Deprecated exec statement (Python 2)
+    { pattern: /^\s*exec\s+.+/, points: -2 },
+ ],
 
-  Java: [
-    // System.out.println() etc.
-    { pattern: /System\.(in|out)\.\w+/, points: 2 },
-    // Class variable declarations
-    {
-      pattern: /(private|protected|public)( )*\w+( )*\w+(( )*=( )*[\w])?/,
-      points: 2,
-    },
-    // Method
-    { pattern: /(private|protected|public)( )*\w+( )*[\w]+\(.+\)/, points: 2 },
-    // String class
-    { pattern: /(^|\s)(String)( )+[\w]+( )*=?/, points: 2 },
-    // List/ArrayList
-    { pattern: /(List<\w+>|ArrayList<\w*>( )*\(.*\))(( )+[\w]+|;)/, points: 2 },
-    // class keyword
-    { pattern: /(public( )*)?class( )*\w+/, points: 2 },
-    // Array declaration.
-    { pattern: /(\w+)(\[( )*\])+( )+\w+/, points: 2 },
-    // final keyword
-    { pattern: /final( )*\w+/, points: 2 },
-    // getter & setter
-    { pattern: /\w+\.(get|set)\(.+\)/, points: 2 },
-    // new Keyword (Java)
-    { pattern: /new [A-Z]\w*( )*\(.+\)/, points: 2 },
-    // C style variable declaration.
-    { pattern: /(^|\s)(char|long|int|float|double)( )+[\w]+( )*=?/, points: 1 },
-    // extends/implements keywords
-    { pattern: /(extends|implements)/, points: 2, nearTop: true },
-    // null keyword
-    { pattern: /null/g, points: 1 },
-    // (else )if statement
-    { pattern: /(else )?if( )*\(.+\)/, points: 1 },
-    // while loop
-    { pattern: /while( )+\(.+\)/, points: 1 },
-    // void keyword
-    { pattern: /void/g, points: 1 },
-    // const
-    { pattern: /const( )*\w+/, points: -1 },
-    // pointer
-    { pattern: /(\w+)( )*\*( )*\w+/, points: -1 },
-    // Single quote multicharacter string
-    { pattern: /'.{2,}'/, points: -1 },
-    // C style include
-    { pattern: /#include( )*(<|")\w+(\.h)?(>|")/, points: -1, nearTop: true },
-  ],
+ Java: [
+  // Package and import statements
+  { pattern: /^\s*package\s+\w+(\.\w+)*\s*;/, points: 2 },
+  { pattern: /^\s*import\s+(\w+(\.\w+)*|\w+(\.\w+)*\.\*);\s*$/, points: 2 },
+  // Class declaration
+  { pattern: /^\s*(public|private|protected)?\s*class\s+\w+(\s+extends\s+\w+)?(\s+implements\s+\w+(,\s*\w+)*)?\s*{/, points: 3 },
+  // Interface declaration
+  { pattern: /^\s*(public|private|protected)?\s*interface\s+\w+/, points: 3 },
+  // Method declaration
+  { pattern: /^\s*(public|private|protected)?\s*(static)?\s*(void|\w+)\s+\w+\s*\(.*\)\s*{/, points: 3 },
+  // Variable declarations
+  { pattern: /^\s*(public|private|protected)?\s*(static)?\s*(final)?\s*\w+\s+\w+\s*=?\s*.+\s*;/, points: 2 },
+  // Primitive data types
+  { pattern: /\b(int|long|double|float|char|byte|short|boolean)\b/, points: 2 },
+  // Object data types
+  { pattern: /\b(String|Integer|Double|Float|Boolean|List|Map|Set|Queue)\b/, points: 2 },
+  // Main method
+  { pattern: /public\s+static\s+void\s+main\s*\(\s*String\[\]\s+\w+\s*\)\s*{/, points: 5 },
+  // Loops
+  { pattern: /for\s*\(.*\)\s*{/, points: 2 },
+  { pattern: /while\s*\(.*\)\s*{/, points: 2 },
+  { pattern: /do\s*{/, points: 2 },
+  // Conditionals
+  { pattern: /if\s*\(.*\)\s*{/, points: 2 },
+  { pattern: /else\s*{/, points: 2 },
+  { pattern: /else\s+if\s*\(.*\)\s*{/, points: 2 },
+  // Try-catch-finally blocks
+  { pattern: /try\s*{/, points: 2 },
+  { pattern: /catch\s*\(.*\)\s*{/, points: 2 },
+  { pattern: /finally\s*{/, points: 2 },
+  // Enhanced for loop
+  { pattern: /for\s*\(\s*\w+\s+:\s+\w+\s*\)\s*{/, points: 3 },
+  // Annotations
+  { pattern: /@\w+/, points: 3 },
+  // Generics
+  { pattern: /\w+<\w+>/, points: 3 },
+  // Static blocks
+  { pattern: /static\s*{/, points: 3 },
+  // Synchronized blocks
+  { pattern: /synchronized\s*\(.*\)\s*{/, points: 3 },
+  // Lambda expressions (Java 8+)
+  { pattern: /\(.*\)\s*->\s*.+/, points: 3 },
+  // Streams (Java 8+)
+  { pattern: /\.stream\(\)/, points: 2 },
+  { pattern: /\.collect\(.*\)/, points: 2 },
+  // Try-with-resources (Java 7+)
+  { pattern: /try\s*\(.*\)\s*{/, points: 3 },
+  // Switch statements
+  { pattern: /switch\s*\(.*\)\s*{/, points: 2 },
+  { pattern: /case\s+.+:/, points: 2 },
+  { pattern: /default\s*:/, points: 2 },
+  // Deprecated syntax or conventions (penalize)
+  { pattern: /System\.gc\(\)/, points: -2 },
+  { pattern: /Thread\.stop\(\)/, points: -3 },
+  { pattern: /System\.runFinalizersOnExit\(\)/, points: -3 },
+  // Singleton pattern (bonus detection)
+  { pattern: /private\s+static\s+\w+\s+instance\s*;/, points: 3 },
+  { pattern: /public\s+static\s+\w+\s+getInstance\s*\(.*\)\s*{/, points: 3 },
+  // Deprecated API usage
+  { pattern: /java\.util\.Vector|java\.util\.Hashtable/, points: -2 },
+  // Basic system output
+  { pattern: /System\.out\.print(ln)?\s*\(.*\)/, points: 2 },
+  // Collections usage
+  { pattern: /new\s+(ArrayList|LinkedList|HashMap|HashSet|TreeSet|TreeMap)<.*>\s*\(.*\)/, points: 2 }
+],
+
 
   HTML: [
-    { pattern: /<!DOCTYPE (html|HTML PUBLIC .+)>/, points: 2, nearTop: true },
-    // Tags
-    {
-      pattern: /<[a-z0-9]+(( )*[\w]+=('|").+('|")( )*)?>.*<\/[a-z0-9]+>/g,
-      points: 2,
-    },
-    // Properties
-    { pattern: /[a-z\-]+=("|').+("|')/g, points: 2 },
-    // PHP tag
-    { pattern: /<\?php/, points: -50 },
-  ],
+    // Standard HTML doctype
+    { pattern: /<!DOCTYPE html>/i, points: 10 },
+    // Common HTML elements
+    { pattern: /<(html|head|body|div|span|h[1-6]|p|a|img|ul|ol|li|table|tr|td|th|form|input|button|label|select|option|textarea)>/i, points: 3 },
+    { pattern: /<\/(html|head|body|div|span|h[1-6]|p|a|img|ul|ol|li|table|tr|td|th|form|input|button|label|select|option|textarea)>/i, points: 3 },
+    // Self-closing tags
+    { pattern: /<(img|br|hr|meta|link|input|source|area|base|col|embed|param|track|wbr)( [^>]*)?>/i, points: 2 },
+    // Anchor with href
+    { pattern: /<a\s+[^>]*href="[^"]*"/i, points: 2 },
+    // Image with src and alt
+    { pattern: /<img\s+[^>]*src="[^"]*"[^>]*alt="[^"]*"/i, points: 3 },
+    // Forms and related elements
+    { pattern: /<form( [^>]*)?>/i, points: 2 },
+    { pattern: /<input( [^>]*)?>/i, points: 2 },
+    { pattern: /<button( [^>]*)?>/i, points: 2 },
+    { pattern: /<select( [^>]*)?>/i, points: 2 },
+    { pattern: /<textarea( [^>]*)?>/i, points: 2 },
+    // Tables
+    { pattern: /<table( [^>]*)?>/i, points: 2 },
+    { pattern: /<tr( [^>]*)?>/i, points: 2 },
+    { pattern: /<td( [^>]*)?>/i, points: 2 },
+    { pattern: /<th( [^>]*)?>/i, points: 2 },
+    // Inline styles
+    { pattern: /style="[^"]*"/i, points: 1 },
+    // Event attributes
+    { pattern: /on(click|load|mouseover|mouseout|change|submit|keydown|keyup|focus|blur)="[^"]*"/i, points: 2 },
+    // HTML comments
+    { pattern: /<!--.*-->/, points: 1 },
+    // Inline scripts
+    { pattern: /<script( [^>]*)?>.*<\/script>/is, points: 2 },
+    // Inline CSS
+    { pattern: /<style( [^>]*)?>.*<\/style>/is, points: 2 },
+    // Meta tags
+    { pattern: /<meta( [^>]*)?>/i, points: 3 },
+    // Links to external stylesheets
+    { pattern: /<link\s+[^>]*rel="stylesheet"[^>]*>/i, points: 3 },
+    // Accessibility attributes
+    { pattern: /alt="[^"]*"/i, points: 2 },
+    { pattern: /aria-[a-z]+="[^"]*"/i, points: 2 },
+    { pattern: /role="[^"]*"/i, points: 2 },
+    // Deprecated or non-standard elements
+    { pattern: /<(font|center|big|strike|tt|marquee|blink)/i, points: -3 },
+    // Missing alt attribute in <img>
+    { pattern: /<img\s+[^>]*src="[^"]*"[^>]*(?!alt)/i, points: -2 },
+    // Incorrect nesting
+    { pattern: /<p>.*<(div|table|form).*<\/(div|table|form)>.*<\/p>/is, points: -2 },
+    // Inline JavaScript event handler usage
+    { pattern: /on\w+="[^"]*"/i, points: 1 },
+],
 
-  CSS: [
-    // Properties
-    { pattern: /[a-z\-]+:(?!:).+;/, points: 2 },
-    // <style> tag from HTML
-    { pattern: /<(\/)?style>/, points: -50 },
-  ],
+CSS: [
+  // Basic selectors
+  { pattern: /^[\w\.\#]+[^\{\}]*\{/, points: 2 }, // Class, ID, or tag selectors
+  // Universal selector
+  { pattern: /\*\s*\{/, points: 1 },
+  // Attribute selectors
+  { pattern: /\[.+?\]/, points: 2 },
+  // Pseudo-classes
+  { pattern: /:\w+/, points: 2 },
+  // Pseudo-elements
+  { pattern: /::\w+/, points: 3 },
+  // Descendant combinator
+  { pattern: /[\w\.\#]+\s+[\w\.\#]+/, points: 2 },
+  // Child combinator
+  { pattern: /[\w\.\#]+\s*>\s*[\w\.\#]+/, points: 2 },
+  // Adjacent sibling combinator
+  { pattern: /[\w\.\#]+\s*\+\s*[\w\.\#]+/, points: 2 },
+  // General sibling combinator
+  { pattern: /[\w\.\#]+\s*~\s*[\w\.\#]+/, points: 2 },
+  // Media queries
+  { pattern: /@media\s+[^{]+\{/, points: 3 },
+  // Keyframes
+  { pattern: /@keyframes\s+\w+\s*\{/, points: 3 },
+  // CSS Variables
+  { pattern: /--\w+\s*:\s*.+;/, points: 3 },
+  { pattern: /var\(--\w+\)/, points: 3 },
+  // Flexbox properties
+  { pattern: /display\s*:\s*flex\s*;/, points: 3 },
+  { pattern: /justify-content\s*:\s*(center|space-between|space-around|space-evenly|flex-start|flex-end)\s*;/, points: 2 },
+  { pattern: /align-items\s*:\s*(center|stretch|flex-start|flex-end|baseline)\s*;/, points: 2 },
+  // Grid properties
+  { pattern: /display\s*:\s*grid\s*;/, points: 3 },
+  { pattern: /grid-template-columns\s*:\s*.+;/, points: 3 },
+  { pattern: /grid-template-rows\s*:\s*.+;/, points: 3 },
+  // Transition properties
+  { pattern: /transition\s*:\s*.+;/, points: 2 },
+  { pattern: /transition-duration\s*:\s*.+;/, points: 2 },
+  { pattern: /transition-timing-function\s*:\s*.+;/, points: 2 },
+  // Animation properties
+  { pattern: /animation\s*:\s*.+;/, points: 3 },
+  { pattern: /animation-name\s*:\s*.+;/, points: 2 },
+  { pattern: /animation-duration\s*:\s*.+;/, points: 2 },
+  // Colors (hex, RGB, RGBA, HSL, HSLA)
+  { pattern: /#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})/, points: 2 },
+  { pattern: /rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)/, points: 2 },
+  { pattern: /rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*(0?\.\d+|1)\s*\)/, points: 2 },
+  { pattern: /hsl\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*\)/, points: 2 },
+  { pattern: /hsla\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*,\s*(0?\.\d+|1)\s*\)/, points: 2 },
+  // Background and gradient properties
+  { pattern: /background\s*:\s*.+;/, points: 2 },
+  { pattern: /background-image\s*:\s*linear-gradient\(.+\);/, points: 3 },
+  { pattern: /background-image\s*:\s*radial-gradient\(.+\);/, points: 3 },
+  // Box model properties
+  { pattern: /margin\s*:\s*.+;/, points: 2 },
+  { pattern: /padding\s*:\s*.+;/, points: 2 },
+  { pattern: /border\s*:\s*.+;/, points: 2 },
+  { pattern: /width\s*:\s*.+;/, points: 2 },
+  { pattern: /height\s*:\s*.+;/, points: 2 },
+  // Deprecated/invalid syntax (penalize)
+  { pattern: /-webkit-[^:]+:\s*.+;/, points: -1 }, // Vendor prefixes
+  { pattern: /-moz-[^:]+:\s*.+;/, points: -1 }, // Vendor prefixes
+  { pattern: /-ms-[^:]+:\s*.+;/, points: -1 }, // Vendor prefixes
+  // Inline styles
+  { pattern: /style\s*=\s*".*"/, points: -3 }, // Penalize inline styles
+],
+
 
   Ruby: [
     // require/include
@@ -655,20 +835,59 @@ const LANGUAGES = {
     // Clojure map declaration
     { pattern: /\{.*\}/, points: 2 },
   ],
+
   CoffeeScript: [
-    // CoffeeScript variable declaration
-    { pattern: /\w+( )?=( )?.+/, points: 2 },
-    // CoffeeScript function definition
-    { pattern: /\w+( )?[-=]>/, points: 2 },
-    // CoffeeScript class declaration
-    { pattern: /\w+( )?class/, points: 2 },
-    // CoffeeScript if statement
-    { pattern: /if( )+.+/, points: 2 },
-    // CoffeeScript for loop
-    { pattern: /for( )+.+/, points: 2 },
-    // CoffeeScript array declaration
-    { pattern: /\[.*\]/, points: 2 },
-  ],
+    // Variable declaration without 'var', 'let', or 'const'
+    { pattern: /^\s*\w+\s*=\s*.+/, points: 2 },
+    // Function definition (arrow function, no 'function' keyword)
+    { pattern: /\w+\s*=\s*\(?.*\)?\s*->/, points: 3 },
+    { pattern: /^\s*->\s*$/, points: 2 },
+    // Implicit return (no explicit 'return' keyword)
+    { pattern: /^\s*\w+\s*=\s*\(?.*\)?\s*->\s*[^return]/, points: 2 },
+    // String interpolation
+    { pattern: /"#\{.+?\}"/, points: 2 },
+    // For loop (no parentheses or curly braces)
+    { pattern: /for\s+\w+\s+(in|of)\s+.+/, points: 3 },
+    // Range
+    { pattern: /\d+\.\.\d+/, points: 2 },
+    // Destructuring assignment
+    { pattern: /{(\s*\w+\s*,?)+\s*} =/, points: 2 },
+    // Class declaration
+    { pattern: /^class\s+\w+/, points: 3 },
+    // Constructor method (no explicit 'constructor' keyword)
+    { pattern: /^\s*constructor\s*:/, points: 3 },
+    // Try/Catch block
+    { pattern: /try\s*.*\s*catch\s+.*:/, points: 2 },
+    // Single-line if
+    { pattern: /if\s+.+\s+then\s+.+/, points: 2 },
+    // Unless keyword (equivalent to 'if not')
+    { pattern: /unless\s+.+/, points: 2 },
+    // Chained method calls (implicit return chaining)
+    { pattern: /\.\w+\s*$/, points: 2 },
+    // Fat arrows (bound functions)
+    { pattern: /=>/, points: 3 },
+    // Undefined or null
+    { pattern: /undefined|null/, points: 1 },
+    // Inline objects
+    { pattern: /{[^:]+:\s*.+}/, points: 2 },
+    // Inline arrays
+    { pattern: /\[.+\]/, points: 2 },
+    // Splat operator (spread/rest equivalent)
+    { pattern: /\.\.\./, points: 3 },
+    // Object comprehension
+    { pattern: /for\s+\w+,\s*\w+\s+of\s+.+/, points: 3 },
+    // Implicit this
+    { pattern: /@(\w+)/, points: 2 },
+    // Do keyword (immediate invocation)
+    { pattern: /do\s+\(?.*\)?/, points: 2 },
+    // No parentheses for function calls
+    { pattern: /\w+\s+[^()\s]+\s*,?\s*[^()\s]+/, points: 2 },
+    // Indentation for code blocks
+    { pattern: /^\s*\w+:$/, points: 1 },
+    // Explicit JavaScript code with backticks
+    { pattern: /`[^`]+`/, points: -5 }
+],
+
   ObjectiveCPP: [
     // Objective-C++ variable declaration
     { pattern: /\w+( )?=( )?.+/, points: 2 },
@@ -941,13 +1160,62 @@ const LANGUAGES = {
   ],
 
   HTML5: [
-    // HTML tags
-    { pattern: /<[^\/]+>.*<\/[^>]+>/, points: 2 },
-    // HTML self-closing tags
-    { pattern: /<[^\/]+\/>/, points: 2 },
-    // HTML comments
-    { pattern: /<!--.*-->/, points: 2 },
-  ],
+    // HTML5 Doctype
+    { pattern: /<!DOCTYPE html>/i, points: 10 },
+    // HTML5 structural elements
+    { pattern: /<(header|footer|section|article|nav|aside|main|figure|figcaption|summary|details|mark|time|progress|output)>/i, points: 3 },
+    { pattern: /<\/(header|footer|section|article|nav|aside|main|figure|figcaption|summary|details|mark|time|progress|output)>/i, points: 3 },
+    // Canvas element
+    { pattern: /<canvas( [^>]*|)>.*<\/canvas>/i, points: 3 },
+    // Video element
+    { pattern: /<video( [^>]*|)>.*<\/video>/i, points: 3 },
+    // Audio element
+    { pattern: /<audio( [^>]*|)>.*<\/audio>/i, points: 3 },
+    // Data attributes
+    { pattern: /data-[a-z0-9-]+="[^"]*"/i, points: 2 },
+    // Placeholder attribute
+    { pattern: /placeholder="[^"]*"/i, points: 2 },
+    // Autofocus attribute
+    { pattern: /autofocus(="[^"]*")?/i, points: 2 },
+    // Required attribute
+    { pattern: /required(="[^"]*")?/i, points: 2 },
+    // Pattern attribute
+    { pattern: /pattern="[^"]*"/i, points: 2 },
+    // HTML5 input types
+    { pattern: /<input[^>]+type="(email|url|tel|number|range|color|date|time|datetime-local|month|week|search)">/i, points: 3 },
+    // Progress element
+    { pattern: /<progress( [^>]*|)>.*<\/progress>/i, points: 3 },
+    // Meter element
+    { pattern: /<meter( [^>]*|)>.*<\/meter>/i, points: 3 },
+    // Source element (for media)
+    { pattern: /<source( [^>]*|)>/i, points: 2 },
+    // Track element (for captions)
+    { pattern: /<track( [^>]*|)>/i, points: 2 },
+    // Semantic HTML5 attributes
+    { pattern: /role="[^"]+"/i, points: 2 },
+    { pattern: /aria-[a-z]+="[^"]*"/i, points: 2 },
+    // Drag and drop
+    { pattern: /draggable="(true|false)"/i, points: 2 },
+    { pattern: /ondragstart="[^"]+"/i, points: 2 },
+    { pattern: /ondrop="[^"]+"/i, points: 2 },
+    // Local storage / session storage (in script)
+    { pattern: /localStorage|sessionStorage/, points: 2 },
+    // WebSocket usage
+    { pattern: /new\s+WebSocket\(.+\)/i, points: 2 },
+    // HTML5 inline SVG
+    { pattern: /<svg( [^>]*|)>.*<\/svg>/i, points: 3 },
+    // HTML5 inline MathML
+    { pattern: /<math( [^>]*|)>.*<\/math>/i, points: 3 },
+    // Form validation
+    { pattern: /novalidate/i, points: 2 },
+    { pattern: /form(="[^"]*")?/i, points: 2 },
+    // Modern browser features (via meta tags)
+    { pattern: /<meta charset="utf-8">/i, points: 5 },
+    { pattern: /<meta name="viewport" content="[^"]*">/i, points: 3 },
+    // Deprecated or non-standard elements
+    { pattern: /<font|<center|<big|<blink|<marquee/i, points: -5 }
+],
+
 
   TEI: [
     // TEI tags

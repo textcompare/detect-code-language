@@ -1,6 +1,6 @@
 # Programming Language Detector
 
-This code provides a basic framework for detecting the programming language of a given code snippet. 
+This code provides a basic framework for detecting the programming language of a given code snippet. It has implemented in http://textcompare.io to compare code and text.
 
 **Supported Languages:**
 

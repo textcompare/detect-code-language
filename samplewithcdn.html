@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Language Detector</title>
+  <!-- Include Bulma CSS from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/detect-code-language/index.js"></script>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Code Language Detector</h1>
+      <div class="field">
+        <label class="label">Enter your code:</label>
+        <div class="control">
+          <textarea id="codeInput" class="textarea" placeholder="Type or paste your code here"></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button id="detectButton" class="button is-primary">Detect Language</button>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Detected Language:</label>
+        <div class="control">
+          <input id="resultInput" class="input" type="text" readonly>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">With Statistics:</label>
+        <div class="control">
+          <textarea id="statistics" class="textarea" placeholder="Type or paste your code here"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const codeInput = document.getElementById('codeInput');
+      const detectButton = document.getElementById('detectButton');
+      const resultInput = document.getElementById('resultInput');
+      const statistics = document.getElementById('statistics');
+      detectButton.addEventListener('click', function () {
+        const codeSnippet = codeInput.value;
+        const detectedLanguage = detect(codeSnippet);
+        resultInput.value = detectedLanguage;
+
+        const resultWithStats = detect(codeSnippet, { heuristic: true, statistics: true });
+        console.log("Detected Language: ${resultWithStats.detected}");
+        console.log("Detailed Statistics:", resultWithStats.statistics);
+        statistics.value = JSON.stringify(resultWithStats.statistics);
+
+      });
+    });
+  </script>
+</body>
+</html>
