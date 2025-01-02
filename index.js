@@ -350,18 +350,19 @@ const LANGUAGES = {
     { pattern: /\[\w+ stringWithFormat:( )*.+\]/, points: 1 },
   ],
 
-  TypeScript: [
-    // Variable declaration
-    { pattern: /let( )+\w+( )*=/, points: 2 },
-    // Function definition
-    { pattern: /function( )+\w+\(.*\)/, points: 2 },
-    // Class declaration
-    { pattern: /class( )+\w+/, points: 2 },
-    // import statement
-    { pattern: /import( )+\{.*\}( )*from/, points: 2 },
-    // console.log
-    { pattern: /console\.log\(.+\)/, points: 1 },
-  ],
+ TypeScript: [
+  // Strict TypeScript patterns
+  { pattern: /let\s+\w+\s*:\s*[\w\[\]\|<>,]+\s*=/, points: 5 }, // Variable with type annotation
+  { pattern: /function\s+\w+\(.*:\s*[\w<>\|,]+\)\s*:\s*[\w<>\|]+/, points: 5 }, // Function with typed parameters and return type
+  { pattern: /interface\s+\w+\s*\{[^}]+\}/, points: 5 }, // Interface definition
+  { pattern: /type\s+\w+\s*=\s*[\w<>\|]+/, points: 5 }, // Type alias
+  { pattern: /import\s+\{?[\w,\s]+\}?\s+from\s+['"].+['"]/, points: 4 }, // Import statement
+  { pattern: /enum\s+\w+\s*\{[^}]+\}/, points: 5 }, // Enum definition
+  { pattern: /as\s+\w+/, points: 4 }, // Type assertion using `as`
+  { pattern: /\w+\s+implements\s+\w+/, points: 4 }, // Class implementing an interface
+  { pattern: /readonly\s+\w+/, points: 4 }, // Readonly modifier
+  { pattern: /private\s+readonly\s+\w+\s*:\s*[\w<>\|]+/, points: 5 }, // Strict class properties
+],
 
   Swift: [
     // Variable declaration
@@ -810,18 +811,6 @@ const LANGUAGES = {
     { pattern: /while( )+.+:/, points: 2 },
   ],
   // J: [
-  //   // J variable declaration
-  //   { pattern: /(\w+)(=:)?(.+)?/, points: 2 },
-  //   // J function definition
-  //   { pattern: /(\w+)(=:)?(.*)( )=(:)?/, points: 2 },
-  //   // J if statement
-  //   { pattern: /if( )+.+do/, points: 2 },
-  //   // J case statement
-  //   { pattern: /switch( )+\(.+\)/, points: 2 },
-  //   // J for loop
-  //   { pattern: /for( )+\(.+\)/, points: 2 },
-  //   // J while loop
-  //   { pattern: /while( )+.+do/, points: 2 },
   // ],
   K: [
     // K variable declaration
