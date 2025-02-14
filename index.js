@@ -389,14 +389,14 @@ const LANGUAGES = {
 
   HTML: [
     // Standard HTML doctype
-    { pattern: /<!DOCTYPE html>/i, points: 10 },
+    { pattern: /<!DOCTYPE html>/i, points: 15 },
     // Common HTML elements
-    { pattern: /<(html|head|body|div|span|h[1-6]|p|a|img|ul|ol|li|table|tr|td|th|form|input|button|label|select|option|textarea)>/i, points: 3 },
-    { pattern: /<\/(html|head|body|div|span|h[1-6]|p|a|img|ul|ol|li|table|tr|td|th|form|input|button|label|select|option|textarea)>/i, points: 3 },
+    { pattern: /<(html|head|body|div|span|h[1-6]|p|a|img|ul|ol|li|table|tr|td|th|form|input|button|label|select|option|textarea)>/i, points: 5 },
+    { pattern: /<\/(html|head|body|div|span|h[1-6]|p|a|img|ul|ol|li|table|tr|td|th|form|input|button|label|select|option|textarea)>/i, points: 5 },
     // Self-closing tags
-    { pattern: /<(img|br|hr|meta|link|input|source|area|base|col|embed|param|track|wbr)( [^>]*)?>/i, points: 2 },
+    { pattern: /<(img|br|hr|meta|link|input|source|area|base|col|embed|param|track|wbr)( [^>]*)?>/i, points: 3 },
     // Anchor with href
-    { pattern: /<a\s+[^>]*href="[^"]*"/i, points: 2 },
+    { pattern: /<a\s+[^>]*href="[^"]*"/i, points: 3 },
     // Image with src and alt
     { pattern: /<img\s+[^>]*src="[^"]*"[^>]*alt="[^"]*"/i, points: 3 },
     // Forms and related elements
@@ -1434,6 +1434,51 @@ CSS: [
     // reStructuredText code block
     { pattern: /^::\n\n\s+[\s\S]*$/, points: 2 },
   ],
+
+  Text: [
+    // Sentences without code-like syntax (e.g., natural language sentences)
+    { pattern: /^[A-Z][a-z]+( [a-z]+){3,}[.?!]$/, points: 3 },
+
+    // Multiple sentences in a paragraph
+    { pattern: /^([A-Z][a-z]+( [a-z]+){3,}[.?!] ){2,}$/, points: 3 },
+
+    // Common English words (non-code)
+    { pattern: /\b(the|and|is|was|were|in|on|at|for|with|without|because|as|if|but)\b/, points: 2 },
+
+    // No special characters or programming operators
+    { pattern: /^[^{}()\[\]=<>;]+$/, points: 3 },
+
+    // No code-like indentation or colons
+    { pattern: /^[^\n]*$/, points: 2 },
+
+    // Long-form writing (paragraphs)
+    { pattern: /^.{50,}$/, points: 2 },
+
+    // Full paragraph structures
+    { pattern: /^([A-Z][a-z]+( [a-z]+){4,}[.?!] ){3,}$/, points: 3 },
+
+    // HTML-like text (not actual HTML)
+    { pattern: /<[^>]+>/, points: -5 }, // Penalizing if it looks like HTML
+
+    // Penalizing mathematical equations (which might indicate LaTeX or a programming language)
+    { pattern: /\d+\s*[\+\-\*\/]\s*\d+/, points: -3 },
+
+    // Penalizing special programming characters
+    { pattern: /[\{\}\(\)\[\]=<>;]/, points: -3 },
+
+    // Penalizing function-like structures
+    { pattern: /\b\w+\s*\(.*\)/, points: -3 },
+
+    // Penalizing import statements
+    { pattern: /^\s*(import|from)\s+\w+/, points: -3 },
+
+    // Penalizing loops and conditions
+    { pattern: /^\s*(if|elif|else|for|while|switch)\s+/, points: -3 },
+
+    // Penalizing code indentation (leading spaces with a colon at the end)
+    { pattern: /^\s{2,}\w+:$/, points: -3 },
+],
+
 
   Unknown: [],
 };
