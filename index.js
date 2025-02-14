@@ -4,10 +4,10 @@ const LANGUAGES = {
     // undefined keyword
     { pattern: /undefined/g, points: 2 },
     // console.log('ayy lmao')
-    { pattern: /console\.log( )*\(/, points: 2 },
+    { pattern: /console\.log( )*\(/, points: 3 },
     { pattern: /document\.addEventListener( )*\(/, points: 2 },
     // Variable declaration
-    { pattern: /(var|const|let)( )+\w+( )*=?/, points: 2 },
+    { pattern: /(var|const|let)( )+\w+( )*=?/, points: 3 },
     // Array/Object declaration
     { pattern: /(('|").+('|")( )*|\w+):( )*[{\[]/, points: 2 },
     // === operator
@@ -15,7 +15,7 @@ const LANGUAGES = {
     // !== operator
     { pattern: /!==/g, points: 1 },
     // Function definition
-    { pattern: /function\*?(( )+[\$\w]+( )*\(.*\)|( )*\(.*\))/g, points: 1 },
+    { pattern: /function\*?(( )+[\$\w]+( )*\(.*\)|( )*\(.*\))/g, points: 3 },
     // null keyword
     { pattern: /null/g, points: 1 },
     // Lambda expression

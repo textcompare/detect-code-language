@@ -1,6 +1,6 @@
 {
   "name": "detect-code-language",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "detect programming language"
   ],
   "dependencies": {
-    "detect-code-language": "file:detect-code-language-1.0.2.tgz"
+    "detect-code-language": "file:detect-code-language-1.0.3.tgz"
   }
 }
