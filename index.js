@@ -1326,13 +1326,52 @@ CSS: [
   ],
 
   Markdown: [
-    // Markdown headings
-    { pattern: /^(#+)\s+.+$/, points: 2 },
-    // Markdown lists
-    { pattern: /^(\s*[-*+]\s+|(\d+\.)\s+).+$/, points: 2 },
-    // Markdown code block
-    { pattern: /^```[\s\S]*?^```$/, points: 2 },
-  ],
+    // Markdown headings (H1–H6)
+    { pattern: /^(#{1,6})\s+.+$/, points: 5 },
+
+    // Markdown lists (unordered and ordered)
+    { pattern: /^(\s*[-*+]\s+|(\d+\.)\s+).+$/, points: 5 },
+
+    // Markdown blockquotes
+    { pattern: /^>\s+.+$/, points: 2 },
+
+    // Markdown inline code (single backticks)
+    { pattern: /`[^`]+`/, points: 2 },
+
+    // Markdown fenced code blocks (triple backticks)
+    { pattern: /^```[\s\S]*?^```$/, points: 3 },
+
+    // Markdown emphasis (bold, italic, strikethrough)
+    { pattern: /(\*\*|__)(.*?)\1/, points: 3 },
+    { pattern: /(\*|_)(.*?)\1/, points: 2 },
+    { pattern: /~~(.*?)~~/, points: 2 },
+
+    // Markdown horizontal rule
+    { pattern: /^(-{3,}|\*{3,}|_{3,})$/, points: 2 },
+
+    // Markdown links
+    { pattern: /\[.+\]\(.+\)/, points: 2 },
+
+    // Markdown images
+    { pattern: /!\[.*\]\(.+\)/, points: 2 },
+
+    // Markdown tables
+    { pattern: /\|(.+)\|/, points: 3 },
+    { pattern: /\|[-:]+\|/, points: 3 },
+
+    // Markdown footnotes
+    { pattern: /\[\^.+\]:/, points: 2 },
+
+    // Markdown task lists
+    { pattern: /^\s*[-*]\s+\[[ x]\]\s+.+$/, points: 2 },
+
+    // Markdown automatic URL linking
+    { pattern: /https?:\/\/\S+/, points: 1 },
+
+    // Header underlines (alternative to #)
+    { pattern: /^(.+)\n(=+|-+)$/, points: 2 },
+
+],
 
   SGML: [
     // SGML tags
@@ -1477,6 +1516,19 @@ CSS: [
 
     // Penalizing code indentation (leading spaces with a colon at the end)
     { pattern: /^\s{2,}\w+:$/, points: -3 },
+
+    //Markdown Negative
+
+    { pattern: /^(#{1,6})\s+.+$/, points: -3 },
+
+    // Markdown blockquotes
+    { pattern: /^>\s+.+$/, points: -2 },
+
+    // Markdown links
+    { pattern: /\[.+\]\(.+\)/, points: -2 },
+
+    // Markdown images
+    { pattern: /!\[.*\]\(.+\)/, points: -2 },
 ],
 
 

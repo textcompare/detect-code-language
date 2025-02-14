@@ -15,3 +15,8 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Added Text Patterns to identify if there is no code and only Pure Text
 - Updated HTML Patterns
+
+## [1.0.7] - 2024-02-14
+### Updated
+- Updated Markdown Patterns
+- Added Negative patterns in Text to avoid Markdown code
